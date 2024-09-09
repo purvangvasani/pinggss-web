@@ -1,5 +1,15 @@
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: "dashboard" },
+  { label: "SETTINGS", type: "label" },
+  {
+    name: "Settings",
+    icon: "settings",
+    children: [
+      { name: "Users", iconText: "SI", path: "/settings/users" },
+      { name: "Roles", iconText: "SU", path: "/settings/roles" },
+      { name: "Permissions", iconText: "FP", path: "/settings/permissions" },
+    ]
+  },
   { label: "PAGES", type: "label" },
   {
     name: "Session/Auth",
@@ -38,10 +48,5 @@ export const navigations = [
     icon: "trending_up",
     children: [{ name: "Echarts", path: "/charts/echarts", iconText: "E" }]
   },
-  {
-    name: "Documentation",
-    icon: "launch",
-    type: "extLink",
-    path: "http://demos.ui-lib.com/matx-react-doc/"
-  }
+  
 ];

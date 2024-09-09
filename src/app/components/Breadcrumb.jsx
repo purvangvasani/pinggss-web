@@ -57,9 +57,11 @@ export default function Breadcrumb({ routeSegments }) {
         {routeSegments
           ? routeSegments.map((route, index) => {
               return index !== routeSegments.length - 1 ? (
+                route.redirect ?
                 <NavLink key={index} to={route.path}>
                   <SubName>{route.name}</SubName>
                 </NavLink>
+                : <SubName key={index}>{route.name}</SubName>
               ) : (
                 <SubName key={index}>{route.name}</SubName>
               );
