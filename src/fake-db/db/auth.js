@@ -11,7 +11,8 @@ const userList = [
     username: "jason_alexander",
     email: "jason@ui-lib.com",
     avatar: "/assets/images/face-6.jpg",
-    age: 25
+    age: 25,
+    "gitToken": "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"
   }
 ];
 
