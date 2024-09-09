@@ -12,7 +12,7 @@ const userList = [
     email: "jason@ui-lib.com",
     avatar: "/assets/images/face-6.jpg",
     age: 25,
-    "gitToken": "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"
+    "gitToken": "email note: er.purvangvasani@gmail.com"
   }
 ];
 
