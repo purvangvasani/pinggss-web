@@ -5,6 +5,7 @@ import CustomizedDialogs from "app/views/material-kit/dialog/CustomizedDialog";
 import AppRoleForm from "./AppRoleForm";
 import { useState } from "react";
 import { Span } from "app/components/Typography";
+import { text, messages } from "app/utils/constant";
 
 // STYLED COMPONENT
 const Container = styled("div")(({ theme }) => ({
@@ -59,7 +60,6 @@ const AppRoles = () => {
   };
 
   const saveRoleData = () => {
-    console.log(roleData)
     setAddRoleModal(false)
   }
 
@@ -67,24 +67,24 @@ const AppRoles = () => {
     <Container>
       <div className="breadcrumb">
         <Breadcrumb
-          routeSegments={[{ name: "Settings", path: "/settings", redirect: false }, { name: "Roles" }]}
+          routeSegments={[{ name: "Settings", path: "/settings", redirect: false }, { name: text.ROLE + 's' }]}
         />
       </div>
       <Box display="flex" alignItems="center" justifyContent={'end'} marginBottom={'1rem'}>
         <Button variant="outlined" color="secondary" onClick={() => setAddRoleModal(true)}>
-          { 'Add Role' }
+          { text.ADD + ' ' + text.ROLE }
         </Button>
         {addRoleModal ? 
-          <CustomizedDialogs title={'Add Role'} 
+          <CustomizedDialogs title={text.ADD + ' ' + text.ROLE} 
             data={<AppRoleForm data={handleRoleSaveEvent} />} 
             onComplete={() => setAddRoleModal(false)} 
             bottomButtons={
               <div>
                 <Button onClick={() => setAddRoleModal(false)} color="primary">
-                  <Span sx={{ pl: 1, textTransform: "capitalize" }}>cancel</Span>
+                  <Span sx={{ pl: 1, textTransform: "capitalize" }}>{text.CANCEL}</Span>
                 </Button>
                 <Button onClick={saveRoleData} color="primary">
-                  <Span sx={{ pl: 1, textTransform: "capitalize" }}>save changes</Span>
+                  <Span sx={{ pl: 1, textTransform: "capitalize" }}>{text.SAVE_CHANGES}</Span>
                 </Button>
               </div>
             } /> : null }
@@ -146,7 +146,7 @@ function PaginationTable(props) {
             {props.headers.map((header, index) => (
               <TableCell key={index} align="center">{header}</TableCell>
             ))}
-            {props.actionButtons && <TableCell align="right">Action</TableCell>}
+            {props.actionButtons && <TableCell align="right">{text.ACTION}</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -174,14 +174,14 @@ function PaginationTable(props) {
               </TableRow>
             )) :
             <TableRow>
-              <TableCell align="center" colSpan={6}>{'No Data Available'}</TableCell>
+              <TableCell align="center" colSpan={6}>{messages.NO_DATA_AVAILABLE}</TableCell>
             </TableRow>
           }
         </TableBody>
       </StyledTable>
       {showComponent && (
         <CustomizedDialogs
-          title={'Edit Role'}
+          title={text.EDIT + ' ' + text.ROLE}
           data={
             <AppRoleForm
               data={handleRoleSaveEvent}
@@ -191,26 +191,35 @@ function PaginationTable(props) {
           bottomButtons={
             <div>
               <Button onClick={() => setShowComponent(false)} color="primary">
-                <Span sx={{ pl: 1, textTransform: "capitalize" }}>cancel</Span>
+                <Span sx={{ pl: 1, textTransform: "capitalize" }}>{text.CANCEL}</Span>
               </Button>
               <Button onClick={saveRoleData} color="primary">
-                <Span sx={{ pl: 1, textTransform: "capitalize" }}>update changes</Span>
+                <Span sx={{ pl: 1, textTransform: "capitalize" }}>{text.UPDATE_CHANGES}</Span>
               </Button>
             </div>
           }
         />)}
       {deleteRoleFlag && (
         <CustomizedDialogs
-          title={'Delete Role: ' + selectedRole.role}
-          data={<div>Are you sure you want to delete this role?</div>}
+          title={`${text.DELETE}: ` + selectedRole.role}
+          data={
+            <div>
+              {messages.DELETE_ITEM_CONFIRMATION_MESSAGE}
+              <div>
+                <b>
+                  <small style={{color: 'red'}}>{messages.ACTION_CANNOT_BE_REVERSED_MESSAGE}</small>
+                </b>
+              </div>
+            </div>
+          }
           onComplete={setDeleteRoleFlag}
           bottomButtons={
             <div>
               <Button onClick={() => setDeleteRoleFlag(false)} color="primary">
-                <Span sx={{ pl: 1, textTransform: "capitalize" }}>cancel</Span>
+                <Span sx={{ pl: 1, textTransform: "capitalize" }}>{text.CANCEL}</Span>
               </Button>
               <Button onClick={handleRoleDeleteEvent} color="error">
-                <Span sx={{ pl: 1, textTransform: "capitalize" }}>delete</Span>
+                <Span sx={{ pl: 1, textTransform: "capitalize" }}>{text.DELETE}</Span>
               </Button>
             </div>
           }
