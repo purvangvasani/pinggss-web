@@ -7,7 +7,7 @@ export const navigations = [
     children: [
       { name: "Users", iconText: "SI", path: "/settings/users" },
       { name: "Roles", iconText: "SU", path: "/settings/roles" },
-      { name: "Permissions", iconText: "FP", path: "/settings/permissions" },
+      { name: "Permissions Groups", iconText: "FP", path: "/settings/permissions" },
     ]
   },
   { label: "PAGES", type: "label" },

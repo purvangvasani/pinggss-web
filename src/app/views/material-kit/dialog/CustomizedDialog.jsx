@@ -42,46 +42,37 @@ const DialogActions = styled(MuiDialogActions)(({ theme }) => ({
   "&.root": { margin: 0, padding: theme.spacing(1) }
 }));
 
-const CustomizedDialogs = () => {
-  const [open, setOpen] = useState(false);
+const CustomizedDialogs = (props) => {
+  const [open, setOpen] = useState(props.showModalButton ? false : true);
 
-  const handleClickOpen = () => setOpen(true);
+  const handleClickOpen = () => {
+    setOpen(true)
+  };
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    props.onComplete(false)
+  };
 
   return (
     <div>
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
+      {/* {props.showModalButton && (
+        <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+          { props?.title || 'Open'}
+        </Button>
+      )} */}
 
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+          { props?.title || 'Dummy Title' }
         </DialogTitle>
 
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-            in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-            lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-            auctor fringilla.
-          </Typography>
+          {props.data}
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Save changes
-          </Button>
+          {props?.bottomButtons || null}
         </DialogActions>
       </Dialog>
     </div>
